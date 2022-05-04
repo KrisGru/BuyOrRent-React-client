@@ -31,7 +31,7 @@ function Register() {
             finished_rent: [],
             finished_buy: [],
           };
-          setUser({ user: body, logged: true });
+          setUser({ data: body, logged: true });
           navigate("/account");
         }}
       >

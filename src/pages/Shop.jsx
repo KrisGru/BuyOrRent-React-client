@@ -1,4 +1,4 @@
-// import Modal from "../components/visualSection/Modal";
+import Modal from "../components/visualSection/Modal";
 import {
   NotificationContainer,
   NotificationManager,
@@ -8,8 +8,11 @@ import { MdRemoveShoppingCart } from "react-icons/md";
 import { BsHourglassSplit } from "react-icons/bs";
 import BooksView from "../components/visualSection/BooksView";
 import jsonData from "../components/basket/randomBooksToShop.json";
+import { AppContext } from "../utils/boxOfStates";
+import { useContext } from "react";
 
 export default function Shop() {
+  const { modalBook } = useContext(AppContext);
   const createNotification = (type, text) => {
     switch (type) {
       case "success":
@@ -51,9 +54,7 @@ export default function Shop() {
         data={jsonData.comedy}
         title="Books from comedy category"
       />
-      {/* {modalBook ? (
-        <Modal createNotification={createNotification} modalBook={modalBook} />
-      ) : null} */}
+      {modalBook ? <Modal createNotification={createNotification} /> : null}
       <NotificationContainer />
     </>
   );

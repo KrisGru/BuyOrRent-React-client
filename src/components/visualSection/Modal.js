@@ -1,7 +1,7 @@
 import { MdShoppingCart } from "react-icons/md";
 import { BsHourglassSplit } from "react-icons/bs";
 import { useContext } from "react";
-import { AppContext } from "../../utils/useContext";
+import { AppContext } from "../../utils/boxOfStates";
 
 export default function Modal({ createNotification }) {
   const { modalBook, setBasketBuy, setBasketRent } = useContext(AppContext);

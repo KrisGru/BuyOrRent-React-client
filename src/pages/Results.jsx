@@ -1,5 +1,5 @@
 import BooksView from "../components/visualSection/BooksView";
-// import Modal from "../components/visualSection/Modal";
+import Modal from "../components/visualSection/Modal";
 import { AppContext } from "../utils/boxOfStates";
 import { useContext } from "react";
 import { MdShoppingCart } from "react-icons/md";
@@ -11,9 +11,9 @@ import {
 } from "react-notifications";
 
 export default function Results() {
-  const { input, results } = useContext(AppContext);
+  const { input, fetchingBook, modalBook } = useContext(AppContext);
 
-  const books = results;
+  const books = fetchingBook;
 
   const createNotification = (type, text) => {
     switch (type) {
@@ -42,7 +42,7 @@ export default function Results() {
           Available For Rent
         </p>
       </div>
-      {results ? (
+      {fetchingBook ? (
         <BooksView
           createNotification={createNotification}
           data={books}
@@ -51,7 +51,7 @@ export default function Results() {
       ) : (
         <h3 className="resultsMessage">Search book</h3>
       )}
-      {/* {modalBook ? <Modal /> : null} */}
+      {modalBook ? <Modal /> : null}
       <NotificationContainer />
     </>
   );

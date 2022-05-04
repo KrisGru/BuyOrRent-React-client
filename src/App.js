@@ -21,7 +21,7 @@ import YourAccount from "./pages/accountNested/YourAccount";
 
 export default function App() {
   // global states
-  const { setResults } = useContext(AppContext);
+  const { setFetchingBook } = useContext(AppContext);
 
   const myKeyGoogleApi = "AIzaSyDUkLYsyGzoEavreh4lSYASKp8M6lj4B3E";
 
@@ -38,13 +38,13 @@ export default function App() {
       })
       .then((res) => {
         if (res.totalItems >= 1) {
-          setResults(res.items);
+          setFetchingBook(res.items);
         } else {
           throw new Error(res.Response);
         }
       })
       .catch(function (error) {
-        alert.log(error.message);
+        alert("nothing was found", error.message);
       });
   };
 

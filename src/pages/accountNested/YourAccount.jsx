@@ -3,7 +3,7 @@ import { AppContext } from "../../utils/boxOfStates";
 
 const YourAccount = () => {
   const { user } = useContext(AppContext);
-  // const { login, email } = user.data;
+  const { login, email } = user.data;
   return (
     <div className="userContainer">
       <div className="yourAccount">
@@ -11,8 +11,8 @@ const YourAccount = () => {
           <div className="userData__content">
             <div className="book__image">Brak zdjęcia</div>
             <div className="elementData">
-              {/* <p>Login: {login} </p> */}
-              {/* <p>Email: {email} </p> */}
+              <p>Login: {login} </p>
+              <p>Email: {email} </p>
               <button className="button lightBtn">edit </button>
             </div>
           </div>
@@ -21,7 +21,7 @@ const YourAccount = () => {
           <div className="userData__content">
             <div className="elementData">
               <p>bought: 12 </p>
-              {/* <p>rented orders: {email} </p> */}
+              <p>rented orders: {email} </p>
               <button className="button lightBtn">edit </button>
             </div>
           </div>

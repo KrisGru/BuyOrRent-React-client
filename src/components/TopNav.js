@@ -8,9 +8,20 @@ import { useNavigate } from "react-router-dom";
 
 export default function TopNav({ bookFetch }) {
   const navigate = useNavigate();
-  const { setInput, input, setBasketBuy, setBasketRent, user, setUser } =
-    useContext(AppContext);
+  const {
+    setInput,
+    input,
+    setBasketBuy,
+    setBasketRent,
+    basketBuy,
+    basketRent,
+    user,
+    setUser,
+  } = useContext(AppContext);
   let { logged, data } = user;
+
+  const numberOfBasketBooks = basketBuy.length + basketRent.length;
+
   return (
     <div className="backgroundNavTop">
       <nav className="navTop">
@@ -27,7 +38,7 @@ export default function TopNav({ bookFetch }) {
         {logged ? (
           <NavLink className="navLink" to="./account">
             <BiBody size="28" />
-            {/* {data.login} */}
+            {data.login}
           </NavLink>
         ) : null}
         <div className="space">
@@ -49,6 +60,14 @@ export default function TopNav({ bookFetch }) {
         </div>
         <NavLink className="navLink" to="./basket">
           <MdShoppingCart size="28" />
+          <span
+            style={{
+              color: "red",
+              fontWeight: "bold",
+              fontSize: "0.8rem",
+              alignItems: "up",
+            }}
+          >{`${numberOfBasketBooks} `}</span>
           Basket
         </NavLink>
         {logged ? (

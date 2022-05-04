@@ -5,8 +5,8 @@ export const AppContext = createContext(null);
 
 export function AppWrapper({ children }) {
   const [input, setInput] = useState("");
-  const [modalBook, setModalBook] = useState({});
-  const [results, setResults] = useState(false);
+  const [modalBook, setModalBook] = useState(false);
+  const [fetchingBook, setFetchingBook] = useState(false);
   const [basketBuy, setBasketBuy] = useState([]);
   const [basketRent, setBasketRent] = useState([]);
   const [user, setUser] = useState({
@@ -21,8 +21,8 @@ export function AppWrapper({ children }) {
         setInput,
         modalBook,
         setModalBook,
-        results,
-        setResults,
+        fetchingBook,
+        setFetchingBook,
         basketBuy,
         setBasketBuy,
         basketRent,

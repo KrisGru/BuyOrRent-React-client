@@ -5,7 +5,7 @@ import { AppContext } from "../utils/boxOfStates";
 
 const Account = () => {
   const { user } = useContext(AppContext);
-  const { login } = user.user;
+  const { login } = user.data;
 
   return (
     <div className="containerAccountNav">
