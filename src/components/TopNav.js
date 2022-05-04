@@ -6,7 +6,8 @@ import { MdShoppingCart } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const TopNav = ({ bookFetch }) => {
+export default function TopNav({ bookFetch }) {
+  const navigate = useNavigate();
   const {
     setInput,
     input,
@@ -15,9 +16,7 @@ const TopNav = ({ bookFetch }) => {
     dataUser,
     setDataUser,
   } = useContext(AppContext);
-  let logged = dataUser.logged;
-  let user = dataUser.user;
-  const navigate = useNavigate();
+  let { logged, user } = dataUser;
   return (
     <div className="backgroundNavTop">
       <nav className="navTop">
@@ -58,11 +57,6 @@ const TopNav = ({ bookFetch }) => {
           <MdShoppingCart size="28" />
           Basket
         </NavLink>
-        {logged ? null : (
-          <NavLink className="navLink" to="./sign-up">
-            Sign up
-          </NavLink>
-        )}
         {logged ? (
           <button
             className="navLink"
@@ -75,11 +69,13 @@ const TopNav = ({ bookFetch }) => {
           >
             Log out
           </button>
-        ) : null}
+        ) : (
+          <NavLink className="navLink" to="./sign-up">
+            Sign up
+          </NavLink>
+        )}
       </nav>
       <Outlet />
     </div>
   );
-};
-
-export default TopNav;
+}

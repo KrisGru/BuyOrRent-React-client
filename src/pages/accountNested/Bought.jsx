@@ -9,13 +9,14 @@ export default function Bought() {
   console.log(boughtOrders);
   return (
     <div className="userContainer">
-      {boughtOrders.map((boughtOrder) => (
+      Bought books
+      {/* {boughtOrders.map((boughtOrder) => (
         <OneOrder
           order={boughtOrder.order}
           key={boughtOrder.time}
           time={boughtOrder.time}
         />
-      ))}
+      ))} */}
     </div>
   );
 }

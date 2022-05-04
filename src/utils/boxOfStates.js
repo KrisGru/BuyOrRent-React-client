@@ -11,7 +11,7 @@ export function AppWrapper({ children }) {
   const [basketRent, setBasketRent] = useState([]);
   const [dataUser, setDataUser] = useState({
     logged: false,
-    user: null,
+    user: {},
   });
 
   return (

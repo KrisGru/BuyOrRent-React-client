@@ -1,19 +1,23 @@
 import { MdShoppingCart } from "react-icons/md";
 import { BsHourglassSplit } from "react-icons/bs";
-import BasketItem from "../components/shop/BasketItem";
+import BasketItem from "../components/basket/BasketItem";
 import { useContext } from "react";
 import { AppContext } from "../utils/boxOfStates";
+import BasketList from "../components/basket/BasketList";
 
 export default function Basket() {
-  const { basketBuy, setBasketBuy, setBasketRent, basketRent, dataUser } =
-    useContext(AppContext);
-  let basketBuyBooks = basketBuy;
-  let basketRentBooks = basketRent;
-  let time = new Date();
+  const {
+    basketBuy,
+    setBasketBuy,
+    setBasketRent,
+    basketRent,
+    dataUser,
+    setDataUser,
+  } = useContext(AppContext);
 
   function totalPrice() {
     let pricesArray = [];
-    basketBuyBooks.map((book) =>
+    basketBuy.map((book) =>
       pricesArray.push(
         book.saleInfo.listPrice.amount ? book.saleInfo.listPrice.amount : null
       )
@@ -27,58 +31,61 @@ export default function Basket() {
   }
 
   function deleteBook(id, type) {
-    if (type === "boughtOrders") {
+    if (type === "buy") {
       if (id === undefined) {
         setBasketBuy([]);
       } else {
-        let basketBuy = basketBuyBooks.filter(function (book) {
-          return book.etag !== id;
+        let cancelbook = basketBuy.filter((book) => {
+          return book.id !== id;
         });
-        setBasketBuy(basketBuy);
+        setBasketBuy(cancelbook);
       }
     } else {
       if (id === undefined) {
         setBasketRent([]);
       } else {
-        let basketRent = basketRentBooks.filter(function (book) {
-          return book.etag !== id;
+        let cancelBook = basketRent.filter(function (book) {
+          return book.id !== id;
         });
-        setBasketRent(basketRent);
+        setBasketRent(cancelBook);
       }
     }
   }
 
-  function handleAllBuy(order, apiAction) {
+  function finishShopping(order, type) {
     if (dataUser.logged) {
-      let { _id } = dataUser.data;
-      fetch(`http://localhost:3001/api/${apiAction}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const { email, login, password, finished_rent, finished_buy } =
+        dataUser.user;
+      let orderBuy = finished_buy;
+      let orderRent = finished_rent;
+      if (type === "buy") {
+        orderBuy.push({ order });
+        deleteBook(order.id, type);
+      } else {
+        orderRent.push({ order });
+        deleteBook(order.id, type);
+      }
+      setDataUser({
+        user: {
+          email,
+          login,
+          password,
+          finished_rent: orderRent,
+          finished_buy: orderBuy,
         },
-        body: JSON.stringify({ _id, order, time }),
-      })
-        .then(function (response) {
-          return response.json();
-        })
-        .then((response) => {
-          deleteBook(order.etag, apiAction);
-        });
-    } else {
-      alert("log in to the portal");
-    }
+        logged: true,
+      });
+    } else alert(" first log in");
   }
 
   return (
     <>
       <h1 className="headerBasket">Basket</h1>
-
       <BasketList
-        basket={basketBuyBooks}
-        handleAllBuy={handleAllBuy}
-        apiAction="boughtOrders"
-        type="buy"
+        basket={basketBuy}
+        finishShopping={finishShopping}
         deleteBook={deleteBook}
+        type="buy"
       />
       <div className="total">
         <div className="totalPrice">
@@ -86,7 +93,7 @@ export default function Basket() {
         </div>
         <button
           className="btnBasket"
-          onClick={() => handleAllBuy(basketBuy, "boughtOrders")}
+          onClick={() => finishShopping(basketBuy, "buy")}
         >
           Buy All
         </button>
@@ -94,56 +101,22 @@ export default function Basket() {
 
       <div className="line-betweenBasketLists"></div>
       <BasketList
-        basket={basketRentBooks}
-        handleAllBuy={handleAllBuy}
-        apiAction="rentedOrders"
+        finishShopping={finishShopping}
+        basket={basketRent}
         type="rent"
         deleteBook={deleteBook}
       />
       <div className="total">
         <div className="totalRentBooks">
-          Total: <span>{basketRentBooks.length} books</span>
+          Total: <span>{basketRent.length} books</span>
         </div>
         <button
           className="btnBasket"
-          onClick={() => handleAllBuy(basketRent, "rentedOrders")}
+          onClick={() => finishShopping(basketRent, "rent")}
         >
           Rent All
         </button>
       </div>
     </>
-  );
-}
-
-function BasketList({ basket, handleAllBuy, deleteBook, type, apiAction }) {
-  return (
-    <div className="basketList">
-      {type === "buy" ? (
-        <div className="basketList__name">
-          <MdShoppingCart className="forSale basketIcon" />
-          Buy
-        </div>
-      ) : (
-        <div className="basketList__name">
-          <BsHourglassSplit className="forRent basketIcon" />
-          Rent
-        </div>
-      )}
-      <div className="basketList__content">
-        {basket.map((book) => (
-          <BasketItem
-            type={type}
-            apiAction={apiAction}
-            handleAllBuy={handleAllBuy}
-            key={book.etag}
-            book={book}
-            deleteBook={deleteBook}
-          />
-        ))}
-        {basket.length ? null : (
-          <h3 className="basketList__empty">Empty basket</h3>
-        )}
-      </div>
-    </div>
   );
 }

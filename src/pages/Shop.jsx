@@ -7,7 +7,7 @@ import { MdShoppingCart } from "react-icons/md";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { BsHourglassSplit } from "react-icons/bs";
 import BooksView from "../components/visualSection/BooksView";
-import jsonData from "../components/shop/randomBooksToShop.json";
+import jsonData from "../components/basket/randomBooksToShop.json";
 
 export default function Shop() {
   const createNotification = (type, text) => {

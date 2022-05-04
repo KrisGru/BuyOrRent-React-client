@@ -28,6 +28,8 @@ function Register() {
             email: e.target.email.value,
             login: e.target.loginR.value,
             password: e.target.passwordR.value,
+            finished_rent: [],
+            finished_buy: [],
           };
           setDataUser({ user: body, logged: true });
           navigate("/account");

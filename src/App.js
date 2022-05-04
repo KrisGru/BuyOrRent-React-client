@@ -44,7 +44,7 @@ export default function App() {
         }
       })
       .catch(function (error) {
-        console.log(error.message);
+        alert.log(error.message);
       });
   };
 
