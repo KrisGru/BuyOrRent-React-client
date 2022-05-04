@@ -4,10 +4,10 @@ import { useContext } from "react";
 import { AppContext } from "../utils/boxOfStates";
 
 export default function SignUp() {
-  const { dataUser, setDataUser } = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
   return (
     <div className="sign-up">
-      <LogInForm dataUser={dataUser} setDataUser={setDataUser} />
+      <LogInForm user={user} setUser={setUser} />
       <h1>Or</h1>
       <Register />
     </div>
@@ -15,7 +15,7 @@ export default function SignUp() {
 }
 
 function Register() {
-  const { setDataUser } = useContext(AppContext);
+  const { setUser } = useContext(AppContext);
   const navigate = useNavigate();
 
   return (
@@ -31,7 +31,7 @@ function Register() {
             finished_rent: [],
             finished_buy: [],
           };
-          setDataUser({ user: body, logged: true });
+          setUser({ user: body, logged: true });
           navigate("/account");
         }}
       >
@@ -58,7 +58,7 @@ function Register() {
   );
 }
 
-function LogInForm({ dataUser, setDataUser, createNotification }) {
+function LogInForm({ user, setUser, createNotification }) {
   const navigate = useNavigate("./");
 
   const handleSubmit = (event) => {
@@ -85,7 +85,7 @@ function LogInForm({ dataUser, setDataUser, createNotification }) {
         if (data === undefined) {
           throw new Error("wrong data");
         }
-        setDataUser({ logged: true, data });
+        setUser({ logged: true, data });
         navigate("/account");
       })
       .catch(function (error) {

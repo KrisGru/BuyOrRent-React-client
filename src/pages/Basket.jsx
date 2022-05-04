@@ -1,19 +1,10 @@
-import { MdShoppingCart } from "react-icons/md";
-import { BsHourglassSplit } from "react-icons/bs";
-import BasketItem from "../components/basket/BasketItem";
 import { useContext } from "react";
 import { AppContext } from "../utils/boxOfStates";
 import BasketList from "../components/basket/BasketList";
 
 export default function Basket() {
-  const {
-    basketBuy,
-    setBasketBuy,
-    setBasketRent,
-    basketRent,
-    dataUser,
-    setDataUser,
-  } = useContext(AppContext);
+  const { basketBuy, setBasketBuy, setBasketRent, basketRent, user, setUser } =
+    useContext(AppContext);
 
   function totalPrice() {
     let pricesArray = [];
@@ -53,9 +44,8 @@ export default function Basket() {
   }
 
   function finishShopping(order, type) {
-    if (dataUser.logged) {
-      const { email, login, password, finished_rent, finished_buy } =
-        dataUser.user;
+    if (user.logged) {
+      const { email, login, password, finished_rent, finished_buy } = user.user;
       let orderBuy = finished_buy;
       let orderRent = finished_rent;
       if (type === "buy") {
@@ -65,7 +55,7 @@ export default function Basket() {
         orderRent.push({ order });
         deleteBook(order.id, type);
       }
-      setDataUser({
+      setUser({
         user: {
           email,
           login,

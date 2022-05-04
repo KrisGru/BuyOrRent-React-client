@@ -8,15 +8,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function TopNav({ bookFetch }) {
   const navigate = useNavigate();
-  const {
-    setInput,
-    input,
-    setBasketBuy,
-    setBasketRent,
-    dataUser,
-    setDataUser,
-  } = useContext(AppContext);
-  let { logged, user } = dataUser;
+  const { setInput, input, setBasketBuy, setBasketRent, user, setUser } =
+    useContext(AppContext);
+  let { logged, data } = user;
   return (
     <div className="backgroundNavTop">
       <nav className="navTop">
@@ -33,7 +27,7 @@ export default function TopNav({ bookFetch }) {
         {logged ? (
           <NavLink className="navLink" to="./account">
             <BiBody size="28" />
-            {user.login}
+            {/* {data.login} */}
           </NavLink>
         ) : null}
         <div className="space">
@@ -61,7 +55,7 @@ export default function TopNav({ bookFetch }) {
           <button
             className="navLink"
             onClick={() => {
-              setDataUser({ logged: false });
+              setUser({ logged: false });
               navigate("/");
               setBasketBuy([]);
               setBasketRent([]);

@@ -9,9 +9,9 @@ export function AppWrapper({ children }) {
   const [results, setResults] = useState(false);
   const [basketBuy, setBasketBuy] = useState([]);
   const [basketRent, setBasketRent] = useState([]);
-  const [dataUser, setDataUser] = useState({
+  const [user, setUser] = useState({
     logged: false,
-    user: {},
+    data: false,
   });
 
   return (
@@ -27,8 +27,8 @@ export function AppWrapper({ children }) {
         setBasketBuy,
         basketRent,
         setBasketRent,
-        dataUser,
-        setDataUser,
+        user,
+        setUser,
       }}
     >
       {children}
