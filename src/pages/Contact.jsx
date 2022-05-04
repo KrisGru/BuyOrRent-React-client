@@ -5,7 +5,8 @@ const Contact = () => (
       <div className="contact__data">
         <p>Śniadeckich 18/3, 00-000 Nigdzie</p>
         <p>buyorrent@thebest.foryou.com</p>
-        <div className="contact__map">Place on the map</div>
+        {/* <div className="contact__map">Place on the map</div> */}
+        <img src="assets/map.jpg" width="300px" alt="map foto" />
       </div>
       <div className="contact__form">
         <form>

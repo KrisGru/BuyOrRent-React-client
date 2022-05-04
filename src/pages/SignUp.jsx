@@ -93,21 +93,24 @@ function LogInForm({ user, setUser, createNotification }) {
       });
   };
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="loginS">
-          <Form.Label>Login</Form.Label>
-          <Form.Control type="text" placeholder="Enter login" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="passwordS">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-        <Button className="button darkBtn" variant="primary" type="submit">
-          Log in
-        </Button>
-      </Form>
-    </div>
+    <>
+      <div className="login-form" style={{ zIndex: "1", position: "relative" }}>
+        <div className="z-index">Server side is disconnected</div>
+        <h1>Sign Up</h1>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="loginS">
+            <Form.Label>Login</Form.Label>
+            <Form.Control type="text" placeholder="Enter login" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="passwordS">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" />
+          </Form.Group>
+          <Button className="button darkBtn" variant="primary" type="submit">
+            Log in
+          </Button>
+        </Form>
+      </div>
+    </>
   );
 }

@@ -1,0 +1,38 @@
+.sign-up {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  justify-content: space-around;
+  padding: 10px 0;
+
+  form {
+    width: 300px;
+  }
+  h1 {
+    padding: 20px 0;
+  }
+}
+
+.logOut {
+  max-width: 1100px;
+  h2 {
+    padding: 10px 0;
+  }
+}
+.login-form {
+  position: relative;
+  bottom: 400px;
+}
+
+.z-index {
+  backdrop-filter: blur(2px);
+  width: 300px;
+  height: 400px;
+  position: relative;
+  z-index: 4;
+  bottom: -400px;
+  font-size: 3rem;
+  font-weight: bold;
+  color: black;
+  padding-top: 100px;
+}
